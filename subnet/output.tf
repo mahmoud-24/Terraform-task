@@ -1,3 +1,3 @@
-output "database_subnets" {
-  value       = aws_subnet.database.*.id
+output "subnet_id" {
+  value = "${aws_subnet.subnet.id}"
 }

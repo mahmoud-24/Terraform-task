@@ -1,9 +1,7 @@
 variable "subnet_cidr" {
-  type = list
 }
 
 variable "zone" {
-  type = list
 
 }
 
@@ -15,6 +13,3 @@ variable "subtype" {
   
 }
 
-variable "count_sub" {
-  
-}
