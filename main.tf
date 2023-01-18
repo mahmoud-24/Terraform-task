@@ -82,6 +82,7 @@ module "network-z2" {
 module "load_blaancer1" {
   source = "./alb"
   alb_name = "private-lb"
+  tg-alb_name ="privet-tg"
   alb_type = true
   security_group = [aws_security_group.http-allowed.id]
   sub_alb_id = [module.private-subnet-z2.subnet_id ,  module.private-subnet-z1.subnet_id]
@@ -100,6 +101,7 @@ module "ec2_m1" {
 module "load_blaancer2" {
   source = "./alb"
   alb_name = "public-lb"
+  tg-alb_name ="pub-tg"
   alb_type = false
   security_group = [aws_security_group.http-allowed.id]
   sub_alb_id = [module.public-subnet-z2.subnet_id ,  module.public-subnet-z1.subnet_id]

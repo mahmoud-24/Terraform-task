@@ -11,15 +11,15 @@ resource "aws_instance" "ec2_pv" {
         sudo systemctl start httpd
         sudo systemctl enable httpd
         sudo sudo chmod 777 /var/www/html/
-        sudo echo '<h1>Hello World from $(hostname -f)</h1>' > /var/www/html/index.html
+        sudo echo "<h1>Hello World from $(hostname -f)</h1>"> /var/www/html/index.html
         sudo systemctl restart httpd
         EOF
 
-
-  # provisioner "local-exec" {
-  #   command = "echo ${aws_instance.ec2_pv.*.private_ip} > all-ips.txt"
-  # }
+# provisioner "local-exec" {
+#     command = "echo ${aws_instance.ec2_pv.*.private_ip} > all-ips.txt"
+#   }
 }
+
 resource "aws_instance" "ec2_pu" {
     ami = "ami-0b5eea76982371e91"
     key_name = "iti"
@@ -41,7 +41,7 @@ resource "aws_instance" "ec2_pu" {
         "sudo chmod +x /home/ec2-user/code.sh",
         ". /home/ec2-user/code.sh",
         "sudo chmod 777 /etc/httpd/conf/httpd.conf",
-        "sudo echo '<VirtualHost*:*>' >> /etc/httpd/conf/httpd.conf",
+        "sudo echo '<VirtualHost *:*>' >> /etc/httpd/conf/httpd.conf",
         "sudo echo -e '\t ProxyPreserveHost on' >> /etc/httpd/conf/httpd.conf",
         "sudo echo -e '\t ServerAdmin ec2-user@localhost' >> /etc/httpd/conf/httpd.conf",
         "sudo echo -e '\t ProxyPass / http://${var.dns_alb}/' >> /etc/httpd/conf/httpd.conf",
@@ -54,7 +54,9 @@ resource "aws_instance" "ec2_pu" {
 
     ]
   }
-#   provisioner "local-exec" {
-#     command = "echo ${aws_instance.ec2_pu.*.public_ip} > all-ips.txt"
-#   }
+# provisioner "local-exec" {
+#      command = "echo ${aws_instance.ec2_pu.*.public_ip} > all-ips.txt"
+#    }
 }
+
+
